@@ -14,8 +14,8 @@ int main()
 {
     int i,j;
     char name[10];
-    char utc1[10],minu1[10],ss1[10],yesno[10],nor1[10],eas1[10],lon1[10],groud1[10],time1[10],more1[10];
-    char utc2[10],minu2[10],ss2[10],nor2[10],eas2[10],lon2[10],groud2[10],time2[10],more2[10];
+    char utc1[10],minu1[10],ss1[10],yesno[10],nor1[10],eas1[10],lon1[10],groud1[10],time1[10],day1[10],year1[10],more1[10];
+    char utc2[10],minu2[10],ss2[10],nor2[10],eas2[10],lon2[10],groud2[10],time2[10],day2[10],more2[10];
     char a[1000][1000];
     
     FILE *fr;
@@ -31,7 +31,7 @@ int main()
     }
     printf("\n");
     
-    fprintf(fw,"时,分,秒,效用,北纬,东经,地面速率,航向,月日年,磁偏角\n");
+    fprintf(fw,"时,分,秒,效用,北纬,东经,地面速率,航向,月,日,年,磁偏角\n");
     
     for(j=0;j<=1000;j++)
     {
@@ -56,12 +56,16 @@ int main()
                 lon1[5]='\0';
                 strncpy(groud1,&a[j][45],5);
                 groud1[5]='\0';
-                strncpy(time1,&a[j][51],6);
-                time1[6]='\0';
+                strncpy(time1,&a[j][51],2);
+                time1[2]='\0';
+                strncpy(day1,&a[j][53],2);
+                day1[2]='\0';
+                strncpy(year1,&a[j][55],2);
+                year1[2]='\0';
                 strncpy(more1,&a[j][59],3);
                 more1[3]='\0';
-                printf("当前%s时%s分%s秒,效用为%s,北纬为%s,东经为%s,地面速率为%s,航向为%s,月日年为%s,磁偏角为%s\n",utc1,minu1,ss1,yesno,nor1,eas1,lon1,groud1,time1,more1);
-                fprintf(fw,"%s,%s,%s,%s,%s%s,%s,%s,%s,%s\n",utc1,minu1,ss1,yesno,nor1,eas1,lon1,groud1,time1,more1);
+                printf("当前%s时%s分%s秒,效用为%s,北纬为%s,东经为%s,地面速率为%s,航向为%s,%s月%s日%s年,磁偏角为%s\n",utc1,minu1,ss1,yesno,nor1,eas1,lon1,groud1,time1,day1,year1,more1);
+                fprintf(fw,"%s,%s,%s,%s,%s%s,%s,%s,%s,%s,%s,%s\n",utc1,minu1,ss1,yesno,nor1,eas1,lon1,groud1,time1,day1,year1,more1);
             }
             else if(name[3]=='G')
             {
@@ -79,12 +83,14 @@ int main()
                 lon2[1]='\0';
                 strncpy(groud2,&a[j][39],2);
                 groud2[2]='\0';
-                strncpy(time2,&a[j][43],4);
-                time2[4]='\0';
+                strncpy(time2,&a[j][43],2);
+                time2[2]='\0';
+                strncpy(day2,&a[j][45],2);
+                day2[2]='\0';
                 strncpy(more2,&a[j][54],3);
                 more2[3]='\0';
-                printf("当前%s时%s分%s秒,效用为%s,北纬为%s,东经为%s,地面速率为%s,航向为%s,月日为%s,磁偏角为%s\n",utc2,minu2,ss2,yesno,nor2,eas2,lon2,groud2,time2,more2);
-                fprintf(fw,"%s,%s,%s,%s,%s%s,%s,%s,%s,%s\n",utc2,minu2,ss2,yesno,nor2,eas2,lon2,groud2,time2,more2);
+                printf("当前%s时%s分%s秒,效用为%s,北纬为%s,东经为%s,地面速率为%s,航向为%s,%s月%s日,磁偏角为%s\n",utc2,minu2,ss2,yesno,nor2,eas2,lon2,groud2,time2,day2,more2);
+                fprintf(fw,"%s,%s,%s,%s,%s%s,%s,%s,%s,%s,,%s\n",utc2,minu2,ss2,yesno,nor2,eas2,lon2,groud2,time2,day2,more2);
             }
         }
         else
